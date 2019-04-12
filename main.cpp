@@ -19,5 +19,16 @@ int main() {
     cout << "Sife of int: " << sizeof(myAge)
                             << endl;
 
+    char provinces[5][2] = {
+            {'B', 'C'},
+            {'A', 'B'},
+            {'M', 'A'},
+            {'Q', 'C'},
+            {'O', 'N'}
+    };
+
+    cout << provinces << "\n2nd letter in 4 row: " << provinces[3][1] << endl;
+    cout << "Index out of bounds: " << provinces[333][1111] << endl;
+
     return 0;
 }
