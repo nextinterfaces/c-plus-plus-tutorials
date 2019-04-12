@@ -1,1 +1,5 @@
-# hello-c-plus-plus
+
+
+## Execute with:
+
+	g++ -std=c++11 main.cpp
