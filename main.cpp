@@ -28,6 +28,135 @@ int getFactorial(int num) {
     return sum;
 }
 
+void makeMeYoung(int* age) {
+    cout << "I used to be" << *age << endl;
+    *age = 21;
+}
+
+void actYourAge(int* age) {
+    *age = 39;
+}
+
+class Animal {
+    private:
+        int height;
+        int weight;
+        string name;
+
+        static int numOfAnimals;
+
+    public:
+        int getHeight(){ return height; }
+        int getWeight(){ return weight; }
+        string getName(){ return name; }
+        void setHeight(int h){ height = h; }
+        void setName(string name){ this -> name = name; }
+
+    // prototype of a function
+    void setAll(int, int, string);
+    // prototype of constructor
+    Animal(int, int, string);
+
+    // destructor
+    ~Animal();
+
+    // overloaded constructor
+    Animal();
+
+    static int getNumOfAnimals() {return numOfAnimals;}
+
+    void toString();
+};
+
+// ---- declare the class variables
+int Animal::numOfAnimals = 0;
+void Animal::setAll(int height, int w, string n) {
+    this -> height = height;
+    this -> weight = w;
+    this -> name = n;
+    Animal::numOfAnimals++;
+}
+
+Animal::Animal(int h, int w, string n) {
+    this -> setAll(h,  w,  n);
+}
+
+Animal::~Animal() {
+    cout << "Animal " << this -> name << " destroyed. Num of animals: "  << Animal::numOfAnimals << endl;
+}
+
+Animal::Animal() {
+    Animal::numOfAnimals++;
+}
+
+void Animal::toString() {
+    cout << "Animal(" << (this -> name) << ", " << (this -> height) << "cm, " << (this -> weight) << "kg)" << endl;
+}
+
+// --- Overriding Animal class
+class Dog : public Animal {
+
+private:
+    string sound = "Woof";
+
+public:
+    void getSound() { cout << sound << endl; }
+
+    // new constructor
+    Dog(int, int, string, string);
+
+    // override parent constructor
+    Dog() : Animal(){};
+
+    void toString();
+};
+
+//// Implementing Dog
+//Dog::Dog(int height, int weight, int name, string bark) :
+//Animal(height, weight, name) {
+//    this -> sound = bark;
+//}
+
+void Dog::toString() {
+    cout << "Dog(" << (this -> getName()) << ", " << (this -> getHeight()) << "cm, " << (this -> getWeight()) << "kg)" << endl;
+}
+
+
+//============================
+//---- Mutliple inheritance
+class LivingThing {
+protected:
+    void breathe() {
+        std::cout << "I'm breathing as a LivingThing." << std::endl;
+    }
+};
+
+class LivingAnimal : protected LivingThing {
+protected:
+    void breathe() {
+        std::cout << "I'm breathing as an LivingAnimal." << std::endl;
+    }
+};
+
+class Reptile : protected LivingThing {
+protected:
+    void crawl() {
+        std::cout << "I'm crawling as a Reptile." << std::endl;
+    }
+};
+
+class Snake : protected LivingAnimal, protected Reptile {
+public:
+    void breathe() {
+        std::cout << "I'm breathing as a Snake." << std::endl;
+    }
+
+    void crawl() {
+        std::cout << "I'm crawling as a snake." << std::endl;
+    }
+};
+
+
 // This is a comment
 int main() {
 
@@ -37,7 +166,7 @@ int main() {
 
     char myChar = 'A';
 
-    int myAge = 123;
+    int myAge = 39;
 
     cout << "My age is: " << myAge << endl;
 
@@ -140,6 +269,71 @@ int main() {
         reader.close();
     }
 
+    // Exception handling
+    int aNum = 0;
+    try {
+        if(aNum != 0) cout << " no exception, num is:" << aNum;
+        else throw(aNum);
+    } catch (int number) {
+        cout << "ERROR: division by zero: " << number << endl;
+    }
+
+    // Pointers
+    // a number
+    int pNum = 39;
+    cout << "'pNum' is located at: " << &pNum << endl;
+    // a number by pointer
+    int* pNumPointer = &pNum;
+    cout << "'pNumPointer' address of pointer located at: " << pNumPointer << endl;
+    // a dereferenced pointer
+    cout << "Dereferenced data '*pNumPointer' at memory address: " << *pNumPointer << endl;
+
+    int pArr[5] = {5, 46, 77, 99, 88};
+    int* pArrPointer = pArr;
+    cout << "Address: " << pArrPointer << ", Value: " << *pArrPointer << endl;
+    pArrPointer ++;
+    cout << "Changed pointer, Address: " << pArrPointer << ", Value: " << *pArrPointer << endl;
+
+    cout << "Address: " << pArr << ", Value: " << *pArr << endl;
+
+    makeMeYoung(&myAge);
+    cout << "Iam " << myAge << endl;
+
+    int& ageRef = myAge;
+    cout << "my Age:" << myAge << endl;
+
+    ageRef++;
+    cout << "my Age:" << myAge << endl;
+
+    actYourAge(&ageRef);
+    cout << "my Age:" << myAge << endl;
+
+    Animal fred;
+    fred.setHeight(33);
+    fred.setName("Fred");
+    fred.toString();
+
+    Animal tom(36, 15, "Tom");
+    tom.toString();
+
+//    Dog sparky(36, 15, "Sparky", "Woof Woof");
+//    sparky.toString();
+//    // calling super class
+//    sparky.Animal::toString();
+//    cout << "num of animals:" << Animal::getNumOfAnimals() << endl;
+
+
+    // -- Multiple inheritance
+    Snake snake;
+    // could be instantiated this way too
+//    Snake *snake2 = new Snake;
+    snake.breathe();
+    snake.crawl();
+
+
+
+
+    //--------------------
     cout << "\n----- END -----" << endl;
     
     return 0;
