@@ -19,7 +19,7 @@ int main() {
     cout << "Sife of int: " << sizeof(myAge)
                             << endl;
 
-    char provinces[5][2] = {
+    char arr[5][2] = {
             {'B', 'C'},
             {'A', 'B'},
             {'M', 'A'},
@@ -27,8 +27,32 @@ int main() {
             {'O', 'N'}
     };
 
-    cout << provinces << "\n2nd letter in 4 row: " << provinces[3][1] << endl;
-    cout << "Index out of bounds: " << provinces[333][1111] << endl;
+    cout << arr << "\n 2 nd letter in 4 row: " << arr[3][1] << endl;
+    cout << "Index out of bounds: " << arr[333][1111] << endl;
+
+//    for (int i = 0; i < sizeof(arr); ++i) {
+//        cout << arr[i] << endl;
+//        for (int j = 0; j < sizeof(arr[i][j]); ++j) {
+//            cout << "i is: " << i << ", j is: " << j << arr[i][j] << endl;
+//        }
+//    }
+
+
+    char chars[7] = { 'H', 'a', 'p', 'p', 'y' };
+    string someStr = " Birthday!";
+
+    cout << chars + someStr << endl;
+
+    string yourName;
+
+//    cout << "What is your name (type it here): ";
+//    getline(cin, yourName);
+//    cout << "hello " << yourName;
+
+    int randNum = (rand() % 100) +1;
+
+    cout << "\n random num is: " << randNum << endl;
+
 
     return 0;
 }
